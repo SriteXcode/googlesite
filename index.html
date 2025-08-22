@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISIDL-2025 Symposium</title>
+ <style>
+    :root {
+      --primary-bg: #1e293b;
+      --secondary-bg: #334155;
+      --accent: #38bdf8;
+      --accent-light: #7dd3fc;
+      --text-main: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --header-bg: #0f172a;
+      --footer-bg: #0f172a;
+      --committee-link: #38bdf8;
+      --committee-link-hover: #fbbf24;
+      --table-odd: #334155;
+      --table-even: #1e293b;
+      --table-header: #38bdf8;
+      --table-header-text: #0f172a;
+      --fieldset-border: #38bdf8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: linear-gradient(62deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: var(--header-bg);
+      color: var(--accent);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top:0;
+      box-shadow: 0 2px 8px rgba(30,41,59,0.12);
+    }
+
+    header img {
+      height: 50px;
+      filter: brightness(0) invert(1);
+    }
+
+    header h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 1.6rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--header-bg);
+      z-index: 9999;
+    }
+
+    .spinner {
+      border: 6px solid var(--secondary-bg);
+      border-top: 6px solid var(--accent);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+
+    main {
+      width: 98vw;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 2rem 0;
+      background: rgba(15,23,42,0.7);
+      border-radius: 1.2rem;
+      box-shadow: 0 4px 24px rgba(30,41,59,0.10);
+      /* border: 2px solid red; */
+    }
+
+    main h1 {
+      text-align: center;
+      padding: .5rem;
+      text-decoration: underline;
+      text-transform: capitalize;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      padding: 1rem;
+      color: var(--accent-light);
+    }
+
+    p,
+    li {
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+      font-family: 'Times New Roman', serif;
+      color: var(--text-secondary);
+      padding-left:1.5rem;
+
+    }
+
+    li {
+      margin: .3rem 0 0 2rem
+    }
+
+    fieldset {
+      border: 1.5px solid var(--fieldset-border);
+      padding: 1rem;
+      margin-top: 1.5rem;
+      background: rgba(51,65,85,0.3);
+      border-radius: .7rem;
+    }
+
+    legend h1 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    .dates table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      background: rgba(30,41,59,0.7);
+      border-radius: .5rem;
+      overflow: hidden;
+    }
+
+    .dates th {
+      background: var(--table-header);
+      color: var(--table-header-text);
+      padding: .6rem;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
+    .dates tr:nth-child(odd) {
+      background: var(--table-odd);
+    }
+
+    .dates tr:nth-child(even) {
+      background: var(--table-even);
+    }
+
+    .dates td {
+      padding: .6rem;
+      font-size: 1rem;
+      color: var(--text-main);
+      text-align: center;
+    }
+
+    .committee p {
+      margin: .4rem 0;
+      font-size: 1.1rem
+    }
+
+    .committee a {
+      color: var(--committee-link);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .committee a:hover {
+      text-decoration: underline;
+      color: var(--committee-link-hover);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      color: var(--accent-light);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+      border-top: 2px solid var(--accent);
+    }
+
+    /* Responsive */
+    @media(max-width:600px) {
+      header {
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      header h1 {
+        margin-top: .5rem;
+        font-size: 1rem;
+      }
+
+      main h1 {
+        font-size: 1.4rem
+      }
+
+      h2 {
+        font-size: 1.2rem
+      }
+
+      p,
+      li {
+        font-size: 1rem
+      }
+
+      .dates td {
+        font-size: .9rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <img src="https://ik.imagekit.io/nx2mu5rdoc/dummy/logo.png" alt="ISIDL Logo">
+    <h1>ISIDL-2025 Symposium</h1>
+  </header>
+
+  <main>
+    <h1>International Symposium on Intelligent, Secure, and Deep Learning Systems (ISIDL-2025)</h1>
+
+    <section>
+      <h2>About the Symposium</h2>
+      <p>
+        The International Symposium on Intelligent, Secure, and Deep Learning Systems (ISIDL 2025) is a premier global forum dedicated to the advancement of artificial intelligence, deep learning, and secure next generation systems. The symposium brings together leading researchers, scientists, industry professionals, and academicians to present their latest research findings, share innovative ideas, and discuss emerging trends in intelligent systems and trustworthy AI technologies.
+      </p>
+    </section>
+
+    <section>
+      <h2>Objectives and Scope</h2>
+      <ul>
+        <li>Deep learning architectures and optimization</li>
+        <li>Trustworthy, explainable, and robust AI</li>
+        <li>Secure and privacy-preserving machine learning</li>
+        <li>AI for cybersecurity and next generation networks</li>
+        <li>Intelligent decision-support systems for healthcare, industry, and smart cities</li>
+        <li>Bio-inspired and hybrid optimization techniques</li>
+        <li>Applications of intelligent systems in real-world environments</li>
+      </ul>
+    </section>
+
+    <section class="dates">
+      <fieldset>
+        <legend>
+          <h1>Important Dates</h1>
+        </legend>
+        <table>
+          <tr>
+            <th>Event</th>
+            <th>Date</th>
+          </tr>
+          <tr>
+            <td>Submission Deadline</td>
+            <td>9<sup>th</sup> June 2025</td>
+          </tr>
+          <tr>
+            <td>Notification of Accept/Reject</td>
+            <td>12<sup>th</sup> – 20<sup>th</sup> June 2025</td>
+          </tr>
+          <tr>
+            <td>Registration Deadline</td>
+            <td>13<sup>th</sup> July 2025</td>
+          </tr>
+          <tr>
+            <td>Final Paper Due</td>
+            <td>31<sup>st</sup> July 2025</td>
+          </tr>
+        </table>
+      </fieldset>
+    </section>
+
+    <section>
+      <h2>Plagiarism Policy</h2>
+      <ol>
+        <li>The paper prior to submission should be checked for plagiarism from licensed plagiarism softwares like Turnitin/iAuthenticate etc. The similarity content should not exceed 15%.</li>
+        <li>No self-plagiarism or plagiarism from others’ work should exist.</li>
+        <li>If any model/figure/table/data/comment from previously published work is used, it must be properly cited.</li>
+        <li>Language should not copy directly from the source material.</li>
+        <li>If copyrighted material is used, prior permission must be acquired.</li>
+      </ol>
+    </section>
+
+    <section class="committee">
+      <h2>TPC Chair</h2>
+
+<ol>
+<li>
+    Prof. Manu Malek – Retired Professor of Computer Science and Telecom Management
+  </li>
+  <li>
+    Prof. Utku Köse – Full Professor, Süleyman Demirel University, Turkey. 
+  </li>
+  <li>
+    Prof. Oscar Castillo – Full Professor of Computer Science, 
+    Tijuana Institute of Technology, Mexico. 
+  </li>
+  
+</ol>
+
+
+      <h2>TPC Team</h2>
+      <ul>
+        <li>Prof. Parmanand, Dean</li>
+        <li>Dr. Mohamed Mostafa Fouad</li>
+        <li>Dr. Sanjay Kumar Biswash</li>
+        <li>Dr. Alex Norta</li>
+        <li>Prof. Kshama Paithankar</li>
+        <li>Prof. Maheshawari Tripathi</li>
+        <li>Prof. Huseyin Irmak</li>
+        <li>Prof. Zoltan Horvath, Professor</li>
+        <li>Prof. Anil Kumar Ahlawat</li>
+        <li>Prof. Abhishek Swaroop</li>
+        <li>Dr. Dac-Nhuong Le</li>
+        <li>Dr. Dusanka Boskovic</li>
+        <li>Dr. D Jude Hemanth</li>
+        <li>Dr. Kirti Tyagi</li>
+        <li>Dr. Pawan Kumar Tiwari</li>
+        <li>Dr. Rajesh Kumar</li>
+        <li>Dr. Amar Mohapatra</li>
+        <li>Dr. PS Rana</li>
+        <li>Prof. Himani Bansal</li>
+        <li>Dr. Brojo Kishore Mishra</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 ISIDL-2025 Symposium | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Loader hide after page load
+    window.addEventListener("load", function () {
+      document.getElementById("loader").style.display = "none";
+    });
+  </script>
+</body>
+
+</html>
